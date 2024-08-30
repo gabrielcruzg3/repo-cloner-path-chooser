@@ -6,3 +6,7 @@
 
 #yeah, sure, would be great if it did not ignored the gitignore file
 !.gitignore
+
+
+#hmmmmmmmm, ah, yes, README. oh, pls README
+!README.md
