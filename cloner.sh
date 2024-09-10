@@ -6,7 +6,7 @@ ROOT_PATH="$(cd "$(dirname "$0")" && pwd)"
 
 # Check if a repository link was provided as an argument
 if [ -z "$1" ]; then
-    echo "Going with env repo url"
+    echo "Going with env repo url: $REPO_URL"
 else
     # Get the repository URL from the argument
     REPO_URL="$1"
