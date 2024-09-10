@@ -98,3 +98,8 @@ if [ "$USER_EMAIL" != "" ]; then
     git config --local user.email "$USER_EMAIL"
     echo "Repository cloned to $TARGET_PATH and user.email set to $USER_EMAIL"
 fi
+
+read -p "Open VSCode? (y/n) " answer
+if [[ "$answer" =~ ^[Yy]$ ]]; then
+    code $TARGET_PATH
+fi
