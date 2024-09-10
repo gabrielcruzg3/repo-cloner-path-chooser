@@ -3,17 +3,23 @@
 # Define the root directory where the script is stored
 ROOT_PATH="$(cd "$(dirname "$0")" && pwd)"
 
-# Define the predefined user email
-USER_EMAIL="your-email@example.com"
 
-# Check if a repository link was provided
+# Check if a repository link was provided as an argument
 if [ -z "$1" ]; then
-    echo "Usage: $0 <repository-url>"
-    exit 1
+    echo "Going with env repo url"
+else
+    # Get the repository URL from the argument
+    REPO_URL="$1"
 fi
 
-# Get the repository URL from the argument
-REPO_URL="$1"
+
+if [ -z "$2" ]; then
+    echo "Going with env email ($USER_EMAIL) or default one"
+else
+    # Define the predefined user email
+    USER_EMAIL="$1"
+fi
+
 
 # Extract the repository name from the URL (default name of the repo)
 REPO_NAME=$(basename -s .git "$REPO_URL")
@@ -85,8 +91,10 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-# Set the local Git config user email
 cd "$TARGET_PATH" || exit
-git config --local user.email "$USER_EMAIL"
 
-echo "Repository cloned to $TARGET_PATH and user.email set to $USER_EMAIL"
+# Set the local Git config user email
+if [ "$USER_EMAIL" != "" ]; then
+    git config --local user.email "$USER_EMAIL"
+    echo "Repository cloned to $TARGET_PATH and user.email set to $USER_EMAIL"
+fi
